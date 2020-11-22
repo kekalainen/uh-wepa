@@ -11,17 +11,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
+      with:
+        node-version: 12.x
     - name: Install dependencies and build
       working-directory: src/main/frontend
       run: |
         npm install
         npm run production
     - uses: actions/upload-artifact@v2
-        with:
-          name: static
-          path: src/main/resources/static
+      with:
+        name: static
+        path: src/main/resources/static
   build:
     runs-on: ubuntu-latest
     needs: frontend
