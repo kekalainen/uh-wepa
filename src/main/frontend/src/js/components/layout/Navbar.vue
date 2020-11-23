@@ -41,8 +41,8 @@
                         <img class="h-10 w-10 rounded-full" :src="avatarUrl" alt="">
                     </div>
                     <div class="ml-3">
-                        <div class="font-medium leading-none text-white">Name</div>
-                        <div class="text-sm font-medium text-gray-200">@handle</div>
+                        <div class="font-medium leading-none text-white">{{ auth.name }}</div>
+                        <div class="text-sm font-medium text-gray-200">@{{ auth.handle }}</div>
                     </div>
                     <font-awesome-icon class="ml-auto text-gray-200 hover:text-white cursor-pointer" :icon="['fas', 'bell']" />
                 </div>
@@ -57,7 +57,9 @@
 <script>
 export default {
     data() {
+        var auth = JSON.parse(localStorage.getItem('auth'));
         return {
+            auth: auth,
             menuOpen: false,
             profileDropdownOpen: false,
             avatarUrl: '/img/profile.svg',
@@ -74,7 +76,7 @@ export default {
             profileLinks: [
                 {
                     name: 'Profile',
-                    url: '/profiles/me'
+                    url: `/profiles/${auth.slug}`
                 },
                 {
                     name: 'Log out',
