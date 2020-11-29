@@ -1,4 +1,4 @@
-package projekti;
+package projekti.user;
 
 import java.util.Arrays;
 

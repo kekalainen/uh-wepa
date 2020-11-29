@@ -1,4 +1,4 @@
-package projekti;
+package projekti.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;

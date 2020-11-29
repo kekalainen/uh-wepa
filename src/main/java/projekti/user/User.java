@@ -1,4 +1,4 @@
-package projekti;
+package projekti.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
