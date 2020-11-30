@@ -17,7 +17,7 @@
                                 <img class="h-8 w-8 rounded-full" :src="avatarUrl" alt="">
                             </button>
                         </div>
-                        <div @click="profileDropdownOpen = false" :class="{ 'transform opacity-100 scale-100': profileDropdownOpen, 'transform opacity-0 scale-95': !profileDropdownOpen }" class="transition ease-in-out duration-75 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
+                        <div @click="profileDropdownOpen = false" :class="{ 'opacity-100 scale-100': profileDropdownOpen, 'opacity-0 scale-95 invisible': !profileDropdownOpen }" class="transform transition-all ease-in-out duration-75 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
                             <router-link :to="link.url" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" v-for="link in profileLinks" :key="link.name">{{ link.name }}</router-link>
                         </div>
                     </div>
