@@ -57,9 +57,8 @@
 <script>
 export default {
     data() {
-        var auth = JSON.parse(localStorage.getItem('auth'));
         return {
-            auth: auth,
+            auth: globalThis.auth,
             menuOpen: false,
             profileDropdownOpen: false,
             avatarUrl: '/img/profile.svg',
@@ -76,7 +75,7 @@ export default {
             profileLinks: [
                 {
                     name: 'Profile',
-                    url: `/profiles/${auth.slug}`
+                    url: `/profiles/${globalThis.auth.slug}`
                 },
                 {
                     name: 'Log out',

@@ -21,6 +21,7 @@
 export default {
     data: function() {
         return {
+            auth: globalThis.auth,
             signUp: false,
             handle: null,
             name: null,
@@ -32,20 +33,19 @@ export default {
         submit: function() {
             if (this.signUp) {
                 wretch('/api/users/signup').post({handle: this.handle, name: this.name, slug: this.slug, password: this.password}).json(json => {
-                    localStorage.setItem('auth', JSON.stringify(json));
+                    globalThis.auth = json;
                     this.$router.replace('/profiles/' + json.slug)
                 });
             } else {
                 wretch('/api/users/login').post({handle: this.handle, password: this.password}).json(json => {
-                    localStorage.setItem('auth', JSON.stringify(json));
+                    globalThis.auth = json;
                     this.$router.replace('/profiles/' + json.slug);
                 });
             }
         }
     },
     beforeMount: function() {
-        var auth = JSON.parse(localStorage.getItem('auth'));
-        if (auth !== null)
+        if (this.auth !== null)
             this.$router.replace('/profiles/' + auth.slug);
     }
 }

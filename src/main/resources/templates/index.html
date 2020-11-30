@@ -12,6 +12,7 @@
             <Navbar v-if="$route.path != '/login'"></Navbar>
             <router-view></router-view>
         </div>
+        <script th:if="${auth}" th:inline="javascript">globalThis.auth = [[${auth}]];</script>
         <script src="/js/index.js"></script>
     </body>
 </html>
