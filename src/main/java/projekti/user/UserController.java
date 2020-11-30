@@ -39,4 +39,9 @@ public class UserController {
     public User signup(@Valid @RequestBody User user) {
         return userService.signup(user);
     }
+
+    @GetMapping("/{slug}/friends")
+    public Page<User> listFriends(@PathVariable("slug") String slug, Pageable pageable) {
+        return userService.listFriends(userService.findBySlug(slug), pageable);
+    }
 }

@@ -1,9 +1,13 @@
 <template>
     <div>
-        <Container class="flex content-center">
-            <div class="flex items-center">
-                <img class="h-24 rounded-full mr-4" :src="user.avatar ? user.avatar : '/img/profile.svg'" alt="">
-                <h1>{{ user.name ? user.name : $route.params.slug }}</h1>
+        <Container v-if="user">
+            <div class="flex flex-wrap justify-between items-center">
+                <div class="flex items-center">
+                    <img class="h-24 rounded-full mr-4" :src="user.avatar ? user.avatar : '/img/profile.svg'" alt="">
+                    <h1>{{ user.name ? user.name : $route.params.slug }}</h1>
+
+                </div>
+                <FriendshipManager :user="user" v-if="user.id != auth.id" />
             </div>
         </Container>
     </div>
@@ -13,7 +17,8 @@
 export default {
     data() {
         return {
-            user: {}
+            auth: globalThis.auth,
+            user: null
         }
     },
     beforeMount: function() {

@@ -63,6 +63,14 @@ public class UserService {
         return user;
     }
 
+    public Page<User> listFriends(User user, Pageable pageable) {
+        return userRepository.findFriends(user, pageable);
+    }
+
+    public Page<User> listPendingFriends(User user, Pageable pageable) {
+        return userRepository.findPendingFriends(user, pageable);
+    }
+
     private void setAuthentication(User user) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getHandle());
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails.getUsername(),

@@ -17,6 +17,7 @@
         "sass-loader": "^8.0.2",
         "tailwindcss": "^2.0.1",
         "vue": "^2.6.12",
+        "vue-luxon": "^0.10.0",
         "vue-router": "^3.4.9",
         "vue-template-compiler": "^2.6.12",
         "wretch": "^1.7.4"
