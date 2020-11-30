@@ -1,6 +1,8 @@
 package projekti.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +24,10 @@ public class UserService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    public Page<User> listByName(String name, Pageable pageable) {
+        return userRepository.findByNameContainsIgnoreCase(name, pageable);
+    }
 
     public User store(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
