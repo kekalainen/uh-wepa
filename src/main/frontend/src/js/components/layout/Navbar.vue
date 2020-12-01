@@ -61,7 +61,7 @@ export default {
             auth: globalThis.auth,
             menuOpen: false,
             profileDropdownOpen: false,
-            avatarUrl: '/img/profile.svg',
+            avatarUrl: globalThis.auth.avatar ? `/api/users/${globalThis.auth.slug}/photos/${globalThis.auth.avatar.id}/square` : '/img/profile.svg',
             links: [
                 {
                     name: 'Friends',

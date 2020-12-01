@@ -7,7 +7,8 @@
                 <ProfileCard
                     class="p-2"
                     v-for="user in users" :key="user.id"
-                    :title="user.name" :href="`/profiles/${user.handle}`" src="/img/profile.svg"
+                    :title="user.name" :href="`/profiles/${user.handle}`"
+                    :src="user.avatar ? `/api/users/${user.slug}/photos/${user.avatar.id}/square` : '/img/profile.svg'"
                 />
             </div>
         </Container>

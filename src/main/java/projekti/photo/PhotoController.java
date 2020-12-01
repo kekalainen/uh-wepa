@@ -35,8 +35,13 @@ public class PhotoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<byte[]> show(@PathVariable Long id) {
-        return photoService.show(id);
+    public ResponseEntity<byte[]> show(@PathVariable Long id) throws IOException {
+        return photoService.show(id, false);
+    }
+
+    @GetMapping("/{id}/square")
+    public ResponseEntity<byte[]> showSquare(@PathVariable Long id) throws IOException {
+        return photoService.show(id, true);
     }
 
     @PostMapping

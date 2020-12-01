@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import projekti.exception.NotFoundException;
 import projekti.exception.UnauthorizedException;
+import projekti.photo.Photo;
 
 @Service
 public class UserService {
@@ -69,6 +70,11 @@ public class UserService {
 
     public Page<User> listPendingFriends(User user, Pageable pageable) {
         return userRepository.findPendingFriends(user, pageable);
+    }
+
+    public void setAvatar(User user, Photo avatar) {
+        user.setAvatar(avatar);
+        userRepository.save(user);
     }
 
     private void setAuthentication(User user) {

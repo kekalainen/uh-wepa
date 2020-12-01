@@ -6,7 +6,8 @@
                 <ProfileCard
                     class="p-2"
                     v-for="user in friends" :key="user.id"
-                    :title="user.name" :href="`/profiles/${user.handle}`" src="/img/profile.svg"
+                    :title="user.name" :href="`/profiles/${user.handle}`"
+                    :src="user.avatar ? `/api/users/${user.slug}/photos/${user.avatar.id}/square` : '/img/profile.svg'"
                 />
             </div>
             <div class="mt-5" v-if="pending.length > 0">
@@ -15,7 +16,8 @@
                     <ProfileCard
                         class="p-2"
                         v-for="user in pending" :key="user.id"
-                        :title="user.name" :href="`/profiles/${user.handle}`" src="/img/profile.svg"
+                        :title="user.name" :href="`/profiles/${user.handle}`"
+                        :src="user.avatar ? `/api/users/${user.slug}/photos/${user.avatar.id}/square` : '/img/profile.svg'"
                     />
                 </div>
             </div>

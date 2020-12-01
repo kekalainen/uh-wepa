@@ -2,6 +2,7 @@ package projekti.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -13,6 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import projekti.photo.Photo;
 
 @Entity
 @Table(name = "\"User\"") // reserved keyword
@@ -31,6 +33,8 @@ public class User extends AbstractPersistable<Long> {
     @NotEmpty
     @Column(nullable = false)
     private String password;
+    @ManyToOne
+    private Photo avatar;
 
     @JsonIgnore
     public String getPassword() {

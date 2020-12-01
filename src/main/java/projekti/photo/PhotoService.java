@@ -1,6 +1,12 @@
 package projekti.photo;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,12 +43,41 @@ public class PhotoService {
         return photoRepository.getOne(id);
     }
 
-    public ResponseEntity<byte[]> show(Long id) {
+    public ResponseEntity<byte[]> show(Long id, boolean square) throws IOException {
         Photo photo = photoRepository.getOne(id);
+        if (square)
+            photo = this.square(photo);
         final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(photo.getContentType()));
         headers.setContentLength(photo.getSize());
+        headers.setCacheControl("max-age=3600;");
         return new ResponseEntity<>(photo.getContent(), headers, HttpStatus.OK);
+    }
+
+    /**
+     * Returns a squared version of a given photo.
+     * 
+     * Used for user avatars
+     */
+    public Photo square(Photo photo) throws IOException {
+        BufferedImage img = ImageIO.read(new ByteArrayInputStream(photo.getContent()));
+
+        int height = img.getHeight();
+        int width = img.getWidth();
+
+        if (height == width)
+            return photo;
+
+        int wh = (width > height ? height : width);
+
+        BufferedImage cropped = img.getSubimage((width / 2) - (wh / 2), (height / 2) - (wh / 2), wh, wh);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        ImageIO.write(cropped, photo.getContentType().replace("image/", ""), out);
+
+        photo.setContent(out.toByteArray());
+        photo.setSize(Long.valueOf(out.size()));
+
+        return photo;
     }
 
     public Photo store(MultipartFile content, String description, User author) throws IOException {
