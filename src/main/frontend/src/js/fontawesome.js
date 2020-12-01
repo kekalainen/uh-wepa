@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBook, faTimes, faBars, faBell, faUser, faKey, faPen, faAddressCard, faAt, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faTimes, faBars, faBell, faUser, faKey, faPen, faAddressCard, faAt, faSearch, faImages } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faBook);
 library.add(faTimes);
@@ -17,3 +17,4 @@ library.add(faPen);
 library.add(faAddressCard);
 library.add(faAt);
 library.add(faSearch);
+library.add(faImages);

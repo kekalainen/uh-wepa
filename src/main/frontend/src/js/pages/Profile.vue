@@ -11,7 +11,14 @@
             </div>
             <div>
                 <hr class="my-6">
-                <Posts :user="user" :friendship="friendship" />
+                <div class="flex justify-around">
+                    <Button :class="{ 'btn-secondary': section.name != activeSection }" @click="activeSection = section.name" v-for="section in sections" :key="section.name">
+                        <font-awesome-icon class="mr-1" :icon="['fas', section.icon]" /> {{ section.title }}
+                    </Button>
+                </div>
+                <hr class="my-6">
+                <Posts :user="user" :friendship="friendship" v-if="activeSection == 'posts'" />
+                <Photos :user="user" v-if="activeSection == 'photos'" />
             </div>
         </Container>
     </div>
@@ -23,7 +30,20 @@ export default {
         return {
             auth: globalThis.auth,
             user: null,
-            friendship: null
+            friendship: null,
+            activeSection: 'posts',
+            sections: [
+                {
+                    name: 'posts',
+                    title: 'Posts',
+                    icon: 'pen'
+                },
+                {
+                    name: 'photos',
+                    title: 'Photos',
+                    icon: 'images'
+                }
+            ]
         }
     },
     beforeMount: function() {
