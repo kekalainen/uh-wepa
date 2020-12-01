@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+h1, h2 {
+    @apply text-gray-900;
+}
 h1 {
-    @apply text-3xl text-gray-900;
+    @apply text-3xl;
+}
+h2 {
+    @apply text-2xl;
 }
 
 body {
