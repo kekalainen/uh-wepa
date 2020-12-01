@@ -6,11 +6,16 @@
         </form>
         <div class="flex flex-wrap" v-if="posts">
             <Card class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="post in posts" :key="post.id">
-                <div class="flex items-center">
-                    <router-link class="text-lg" :to="`/profiles/${post.author.slug}`">{{ post.author.name }}</router-link>
-                    <p class="mx-1">&middot;</p><p class="font-light">{{ post.createdAt | luxonRelative }}</p>
+                <div class="flex">
+                    <img class="w-1/6 h-1/6 rounded-full mr-4" :src="post.author.avatar ? `/api/users/${post.author.slug}/photos/${post.author.avatar.id}/square` : '/img/profile.svg'" alt="">
+                    <div>
+                        <div class="flex items-center">
+                            <router-link class="text-lg" :to="`/profiles/${post.author.slug}`">{{ post.author.name }}</router-link>
+                            <p class="mx-1">&middot;</p><p class="font-light">{{ post.createdAt | luxonRelative }}</p>
+                        </div>
+                        <p>{{ post.content }}</p>
+                    </div>
                 </div>
-                <p>{{ post.content }}</p>
             </Card>
         </div>
     </div>
