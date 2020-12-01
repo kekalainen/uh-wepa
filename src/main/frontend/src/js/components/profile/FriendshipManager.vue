@@ -25,26 +25,26 @@
 
 <script>
 export default {
-    props: {
-        user: Object
+    model: {
+        prop: 'friendship',
+        event: 'change'
     },
-    data: function() {
-        return {
-            friendship: null
-        }
+    props: {
+        user: Object,
+        friendship: Object
     },
     methods: {
         load: function() {
-            wretch(`/api/friends/${this.user.slug}`).get().notFound(e => this.friendship = false).json(json => this.friendship = json);
+            wretch(`/api/friends/${this.user.slug}`).get().notFound(e => this.$emit('change', false)).json(json => this.$emit('change', json));
         },
         request: function() {
-            wretch(`/api/friends/${this.user.slug}`).post().json(json => this.friendship = json);
+            wretch(`/api/friends/${this.user.slug}`).post().json(json => this.$emit('change', json));
         },
         accept: function() {
-            wretch(`/api/friends/${this.user.slug}`).put().json(json => this.friendship = json);
+            wretch(`/api/friends/${this.user.slug}`).put().json(json => this.$emit('change', json));
         },
         destroy: function() {
-            wretch(`/api/friends/${this.user.slug}`).delete().res(res => this.friendship = false);
+            wretch(`/api/friends/${this.user.slug}`).delete().res(res => this.$emit('change', false));
         }
     },
     beforeMount: function() {

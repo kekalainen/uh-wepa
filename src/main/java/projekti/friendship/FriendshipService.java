@@ -43,4 +43,11 @@ public class FriendshipService {
             throw new NotFoundException();
         friendshipRepository.delete(friendship);
     }
+
+    public boolean areFriends(User one, User two) {
+        if (one.equals(two))
+            return true;
+        Friendship friendship = friendshipRepository.findByRequesterAndRequesteeOrRequesterAndRequestee(one, two, two, one);
+        return friendship != null && friendship.isAccepted();
+    }
 }

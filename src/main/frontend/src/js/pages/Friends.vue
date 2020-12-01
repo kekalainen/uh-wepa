@@ -3,7 +3,7 @@
         <Header title="Friends" />
         <Container>
             <div class="flex flex-wrap" v-if="friends">
-                <Card
+                <ProfileCard
                     class="p-2"
                     v-for="user in friends" :key="user.id"
                     :title="user.name" :href="`/profiles/${user.handle}`" src="/img/profile.svg"
@@ -12,7 +12,7 @@
             <div class="mt-5" v-if="pending.length > 0">
                 <h2>Friend requests</h2>
                 <div class="flex flex-wrap">
-                    <Card
+                    <ProfileCard
                         class="p-2"
                         v-for="user in pending" :key="user.id"
                         :title="user.name" :href="`/profiles/${user.handle}`" src="/img/profile.svg"

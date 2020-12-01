@@ -7,7 +7,11 @@
                     <h1>{{ user.name ? user.name : $route.params.slug }}</h1>
 
                 </div>
-                <FriendshipManager :user="user" v-if="user.id != auth.id" />
+                <FriendshipManager :user="user" v-model="friendship" v-if="user.id != auth.id" />
+            </div>
+            <div>
+                <hr class="my-6">
+                <Posts :user="user" :friendship="friendship" />
             </div>
         </Container>
     </div>
@@ -18,7 +22,8 @@ export default {
     data() {
         return {
             auth: globalThis.auth,
-            user: null
+            user: null,
+            friendship: null
         }
     },
     beforeMount: function() {

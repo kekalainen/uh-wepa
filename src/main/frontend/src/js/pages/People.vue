@@ -4,7 +4,7 @@
         <Container>
             <Input class="p-2" placeholder="Search by name" name="name" :icon="['fas', 'search']" v-model="name" @change="load" />
             <div class="flex flex-wrap" v-if="users">
-                <Card
+                <ProfileCard
                     class="p-2"
                     v-for="user in users" :key="user.id"
                     :title="user.name" :href="`/profiles/${user.handle}`" src="/img/profile.svg"
