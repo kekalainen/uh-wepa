@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PutMapping("/{slug}/avatar")
-    public void listFriends(@RequestParam("id") Long id, Principal principal) {
+    public void updateAvatar(@RequestParam("id") Long id, Principal principal) {
         User user = userService.findByHandle(principal.getName());
         Photo photo = photoService.getOne(id);
         if (!photo.getAuthor().equals(user))
