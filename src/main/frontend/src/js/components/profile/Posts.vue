@@ -14,6 +14,7 @@
                             <p class="mx-1">&middot;</p><p class="font-light">{{ post.createdAt | luxonRelative }}</p>
                         </div>
                         <p>{{ post.content }}</p>
+                        <Likes :user="user" :item="post" v-model="post.likes" type="post" />
                     </div>
                 </div>
             </Card>

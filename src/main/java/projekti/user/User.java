@@ -20,6 +20,7 @@ import projekti.photo.Photo;
 @Entity
 @Table(name = "\"User\"") // reserved keyword
 @AllArgsConstructor @Data @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class User extends AbstractPersistable<Long> {
 
     @NotEmpty
@@ -35,7 +36,7 @@ public class User extends AbstractPersistable<Long> {
     @Column(nullable = false)
     private String password;
     @OneToOne
-    @JsonIgnoreProperties({"hibernateLazyInitializer"})
+    @JsonIgnoreProperties({"likes"})
     private Photo avatar;
 
     @JsonIgnore

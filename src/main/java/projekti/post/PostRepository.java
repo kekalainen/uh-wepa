@@ -9,6 +9,6 @@ import projekti.user.User;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @EntityGraph(attributePaths = {"author"})
+    @EntityGraph(attributePaths = {"author", "likes"})
     Page<Post> findAllByRecipient(User recipient, Pageable pageable);
 }

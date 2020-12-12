@@ -16,6 +16,7 @@
                     <img class="py-3" :src="`/api/users/${user.slug}/photos/${photo.id}`" :alt="photo.description" />
                 </a>
                 <p>{{ photo.description }}</p>
+                <Likes :user="user" :item="photo" v-model="photo.likes" type="photo" />
             </Card>
         </div>
     </div>
