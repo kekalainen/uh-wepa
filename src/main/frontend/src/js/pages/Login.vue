@@ -45,7 +45,7 @@ export default {
         }
     },
     beforeMount: function() {
-        if (this.auth !== null)
+        if (typeof this.auth !== 'undefined')
             this.$router.replace('/profiles/' + auth.slug);
     }
 }
