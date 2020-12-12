@@ -31,7 +31,7 @@ export default {
         return {
             name: "",
             friends: null,
-            pending: null
+            pending: []
         }
     },
     methods: {
