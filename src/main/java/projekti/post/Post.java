@@ -3,6 +3,7 @@ package projekti.post;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -34,6 +35,7 @@ public class Post extends AbstractPersistable<Long> {
     @ManyToOne
     private Post parent;
     @NotBlank
+    @Column(length = 5000)
     private String content;
     @OneToMany(mappedBy = "post")
     private List<Like> likes;
