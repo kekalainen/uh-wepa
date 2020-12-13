@@ -11,6 +11,9 @@
         <p>{{ photo.description }}</p>
         <div class="w-full flex justify-between pt-2">
             <Likes :user="user" :item="photo" v-model="photo.likes" type="photo" />
+            <div v-if="commentButton">
+                <IconButton @click="$emit('open')" :icon="['fas', 'comment-alt']" />
+            </div>
         </div>
     </div>
 </template>
@@ -19,7 +22,8 @@
 export default {
     props: {
         user: Object,
-        photo: Object
+        photo: Object,
+        commentButton: Boolean
     },
     data: function() {
         return {

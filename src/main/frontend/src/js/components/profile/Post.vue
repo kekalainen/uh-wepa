@@ -9,6 +9,9 @@
             <p>{{ post.content }}</p>
             <div class="w-full flex justify-between pt-2">
                 <Likes :user="user" :item="post" v-model="post.likes" type="post" />
+                <div v-if="commentButton">
+                    <IconButton @click="$emit('open')" :icon="['fas', 'comment-alt']" />
+                </div>
             </div>
         </div>
     </div>
@@ -18,7 +21,8 @@
 export default {
     props: {
         user: Object,
-        post: Object
+        post: Object,
+        commentButton: Boolean
     }
 }
 </script>

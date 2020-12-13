@@ -7,7 +7,7 @@
         </form>
         <div class="flex flex-wrap" v-if="!loading">
             <Card class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="photo in photos" :key="photo.id">
-                <Photo @open="$router.push(`/profiles/${$route.params.slug}/photos/${photo.id}`)" :user="user" :photo="photo" />
+                <Photo @open="$router.push(`/profiles/${$route.params.slug}/photos/${photo.id}`)" :user="user" :photo="photo" :comment-button="true" />
             </Card>
         </div>
         <LoadingSpinner v-else />

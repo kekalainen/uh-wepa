@@ -2,6 +2,8 @@
     <div v-if="user && post">
         <Card>
             <Post :user="user" :post="post" />
+            <hr class="my-6">
+            <Comments :user="user" :item="post" type="post" :friendship="friendship" />
         </Card>
     </div>
 </template>
@@ -9,7 +11,8 @@
 <script>
 export default {
     props: {
-        user: Object
+        user: Object,
+        friendship: [Object, Boolean]
     },
     data: function() {
         return {
