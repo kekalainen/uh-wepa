@@ -11,6 +11,7 @@ import projekti.user.User;
 
 public interface PhotoRepository extends JpaRepository<Photo, Long> {
 
+    Photo findByAuthorAndId(User author, Long id);
     List<Photo> findAllByAuthor(User author);
     @EntityGraph(attributePaths = {"likes"})
     Page<Photo> findAllByAuthor(User author, Pageable pageable);

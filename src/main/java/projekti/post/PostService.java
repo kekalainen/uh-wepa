@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import projekti.exception.UnauthorizedException;
 import projekti.friendship.FriendshipService;
+import projekti.user.User;
 import projekti.user.UserService;
 
 @Service
@@ -19,6 +20,10 @@ public class PostService {
     private UserService userService;
 
     @Autowired FriendshipService friendshipService;
+
+    public Post show(User recipient, Long id) {
+        return postRepository.findByRecipientAndId(recipient, id);
+    }
 
     public Page<Post> listByRecipient(String slug, Pageable pageable) {
         return postRepository.findAllByRecipient(userService.findBySlug(slug), pageable);

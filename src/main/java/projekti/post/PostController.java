@@ -26,6 +26,11 @@ public class PostController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/{id}")
+    public Post show(@PathVariable("slug") String slug, @PathVariable("id") Long id) {
+        return postService.show(userService.findBySlug(slug), id);
+    }
+
     @GetMapping
     public Page<Post> list(@PathVariable("slug") String slug, Pageable pageable) {
         return postService.listByRecipient(slug, pageable);

@@ -4,21 +4,12 @@
             <Input class="w-full" :required="true" :placeholder="`Write something on ${user.name}'s profile`" name="content" v-model="content" />
             <Button class="ml-2">Post</Button>
         </form>
-        <div class="flex flex-wrap" v-if="posts">
-            <Card class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="post in posts" :key="post.id">
-                <div class="flex">
-                    <img class="w-1/6 h-1/6 rounded-full mr-4" :src="post.author.avatar ? `/api/users/${post.author.slug}/photos/${post.author.avatar.id}/square` : '/img/profile.svg'" alt="">
-                    <div>
-                        <div class="flex items-center">
-                            <router-link class="text-lg" :to="`/profiles/${post.author.slug}`">{{ post.author.name }}</router-link>
-                            <p class="mx-1">&middot;</p><p class="font-light">{{ post.createdAt | luxonRelative }}</p>
-                        </div>
-                        <p>{{ post.content }}</p>
-                        <Likes :user="user" :item="post" v-model="post.likes" type="post" />
-                    </div>
-                </div>
+        <div class="flex flex-wrap" v-if="!loading">
+            <Card @click="activePost = post.id" class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="post in posts" :key="post.id">
+                <Post @open="$router.push(`/profiles/${$route.params.slug}/posts/${post.id}`)" :user="user" :post="post" />
             </Card>
         </div>
+        <LoadingSpinner v-else />
     </div>
 </template>
 
@@ -26,18 +17,24 @@
 export default {
     props: {
         user: Object,
-        friendship: Object
+        friendship: [Object, Boolean]
     },
     data: function() {
         return {
             auth: globalThis.auth,
+            loading: true,
+            activePost: null,
             posts: null,
             content: null
         }
     },
     methods: {
         load: function() {
-            wretch(`/api/users/${this.user.slug}/posts?size=25&sort=id,DESC`).get().json(json => this.posts = json.content);
+            this.loading = true;
+            wretch(`/api/users/${this.user.slug}/posts?size=25&sort=id,DESC`).get().json(json => {
+                this.posts = json.content;
+                this.loading = false;
+            });
         },
         submit: function() {
             wretch(`/api/users/${this.user.slug}/posts`).post({content: this.content}).json(json => this.load());

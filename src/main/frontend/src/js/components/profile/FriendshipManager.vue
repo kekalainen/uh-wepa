@@ -31,7 +31,7 @@ export default {
     },
     props: {
         user: Object,
-        friendship: Object
+        friendship: [Object, Boolean]
     },
     methods: {
         load: function() {

@@ -43,6 +43,10 @@ public class PhotoService {
         return photoRepository.getOne(id);
     }
 
+    public Photo findByAuthorAndId(User author, Long id) {
+        return photoRepository.findByAuthorAndId(author, id);
+    }
+
     public ResponseEntity<byte[]> show(Long id, boolean square) throws IOException {
         Photo photo = photoRepository.getOne(id);
         if (square)

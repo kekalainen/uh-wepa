@@ -1,13 +1,8 @@
 <template>
-    <p class="pt-2">
-        <font-awesome-icon
-            @click="like(item)"
-            class="text-purple-300 hover:text-purple-500 cursor-pointer"
-            :class="{ 'text-purple-500': liked }"
-            :icon="['fas', 'thumbs-up']"
-        />
+    <div>
+        <IconButton @click="like(item)" :class="{ 'text-purple-500': liked }" :icon="['fas', 'thumbs-up']" />
         <span class="font-light" v-if="item.likes.length > 0">{{ item.likes[0].author.name }}<span v-if="item.likes.length > 1"> and {{ item.likes.length - 1 }} other{{ item.likes.length != 2 ? 's': '' }}</span></span>
-    </p>
+    </div>
 </template>
 
 <script>

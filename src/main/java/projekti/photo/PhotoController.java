@@ -29,6 +29,11 @@ public class PhotoController {
     @Autowired
     UserService userService;
 
+    @GetMapping("/{id}/json")
+    public Photo showJson(@PathVariable("slug") String slug, @PathVariable Long id) {
+        return photoService.findByAuthorAndId(userService.findBySlug(slug), id);
+    }
+
     @GetMapping
     public Page<Photo> list(@PathVariable("slug") String slug, Pageable pageable) {
         return photoService.listByAuthor(slug, pageable);
