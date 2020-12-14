@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - run: mvn -B test
+      - run: mvn -B test | grep -v "DEBUG"
   build:
     runs-on: ubuntu-latest
     needs: test

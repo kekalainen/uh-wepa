@@ -3,6 +3,7 @@ package projekti;
 import org.fluentlenium.adapter.junit.FluentTest;
 import org.fluentlenium.configuration.FluentConfiguration;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public abstract class BaseTest extends FluentTest {
         User test = new User("test", "Test", "test", "password", null);
         userService.store(test);
         goTo(baseUrl + "/login");
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.id("handle")));
         find("#handle").fill().with("test");
         find("#password").fill().with("password");
         find("form").first().submit();
