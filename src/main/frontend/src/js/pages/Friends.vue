@@ -7,7 +7,7 @@
                     <ProfileCard
                         class="p-2"
                         v-for="user in friends" :key="user.id"
-                        :title="user.name" :href="`/profiles/${user.handle}`"
+                        :title="user.name" :href="`/profiles/${user.slug}`"
                         :src="user.avatar ? `/api/users/${user.slug}/photos/${user.avatar.id}/square` : '/img/profile.svg'"
                     />
                 </div>
@@ -23,7 +23,7 @@
                     <ProfileCard
                         class="p-2"
                         v-for="user in pending" :key="user.id"
-                        :title="user.name" :href="`/profiles/${user.handle}`"
+                        :title="user.name" :href="`/profiles/${user.slug}`"
                         :src="user.avatar ? `/api/users/${user.slug}/photos/${user.avatar.id}/square` : '/img/profile.svg'"
                     />
                 </div>
