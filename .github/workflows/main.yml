@@ -36,8 +36,10 @@ jobs:
           java-version: 11
       - uses: actions/cache@v2
         with:
-          path: ~/.m2 ~/.cache/selenium
-          key: ${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          path: |
+            ~/.m2/repository
+            ~/.cache/selenium
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
       - run: mvn -B test
   build:
     runs-on: ubuntu-latest
