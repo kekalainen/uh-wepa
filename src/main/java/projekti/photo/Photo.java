@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
@@ -21,6 +22,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import projekti.comment.Comment;
 import projekti.like.Like;
 import projekti.user.User;
 
@@ -43,8 +45,11 @@ public class Photo extends AbstractPersistable<Long> {
     private byte[] content;
     @NotBlank
     private String description;
-    @OneToMany(mappedBy = "photo")
+    @OneToMany(mappedBy = "photo", cascade = CascadeType.REMOVE)
     private List<Like> likes;
+    @JsonIgnore
+    @OneToMany(mappedBy = "photo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
     @CreationTimestamp
     private Date createdAt;
 }
