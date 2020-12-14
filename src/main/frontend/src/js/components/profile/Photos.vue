@@ -8,7 +8,7 @@
         <div v-if="!loading">
             <div class="flex flex-wrap" v-if="photos.length > 0">
                 <Card class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="photo in photos" :key="photo.id">
-                    <Photo @open="$router.push(`/profiles/${$route.params.slug}/photos/${photo.id}`)" :user="user" :photo="photo" :comment-button="true" />
+                    <Photo @open="$router.push(`/profiles/${$route.params.slug}/photos/${photo.id}`)" :user="user" :photo="photo" :comment-button="true" v-on:destroy="load" />
                 </Card>
             </div>
             <p class="text-center" v-else>{{ user.name }} hasn't uploaded any photos.</p>
@@ -45,10 +45,6 @@ export default {
                 return alert('Photo exceeds maximum size of 5 MiB')
             wretch(`/api/users/${this.user.slug}/photos`).formData({content: content, description: this.description}).post().json(json => this.load());
             this.description = null;
-        },
-        destroy: function(id) {
-            if (confirm("Are you sure you want to delete this photo?"))
-                wretch(`/api/users/${this.user.slug}/photos/${id}`).delete().res(res => this.load());
         }
     },
     beforeMount: function() {

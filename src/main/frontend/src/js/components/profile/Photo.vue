@@ -36,6 +36,10 @@ export default {
         setAvatar: function(photo) {
             if (confirm("Are you sure you want to set this photo as your avatar?"))
                 wretch(`/api/users/${this.user.slug}/avatar?id=${photo.id}`).put().res(res => window.location.reload());
+        },
+        destroy: function(id) {
+            if (confirm("Are you sure you want to delete this photo?"))
+                wretch(`/api/users/${this.user.slug}/photos/${id}`).delete().res(res => this.$emit('destroy'));
         }
     }
 }
