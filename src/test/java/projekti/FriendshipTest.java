@@ -4,26 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import projekti.friendship.FriendshipService;
 import projekti.user.User;
-import projekti.user.UserService;
 
-@ActiveProfiles("test")
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class FriendshipTest {
+public class FriendshipTest extends BaseTest {
 
     @Autowired
     private FriendshipService friendshipService;
-
-    @Autowired
-    private UserService userService;
 
     @Test
     public void testAreFriends() {
@@ -36,5 +27,25 @@ public class FriendshipTest {
         assertFalse(friendshipService.areFriends(one, two));
         friendshipService.accept(one, two);
         assertTrue(friendshipService.areFriends(one, two));
+    }
+
+    @Test
+    public void testUi() {
+        User test = authenticate();
+        User other = new User("other", "other", "other", "password", null);
+        userService.store(other);
+
+        goTo(baseUrl + "/profiles/other");
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.tagName("button")));
+        assertTrue(pageSource().contains("Add friend"));
+        friendshipService.store(other, test);
+        goTo(baseUrl + "/profiles/other");
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.tagName("button")));
+        assertFalse(pageSource().contains("Add friend"));
+        assertTrue(pageSource().contains("Accept"));
+        friendshipService.accept(other, test);
+        goTo(baseUrl + "/profiles/other");
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.tagName("button")));
+        assertTrue(pageSource().contains("Unfriend"));
     }
 }
