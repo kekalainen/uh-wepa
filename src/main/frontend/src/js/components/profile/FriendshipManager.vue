@@ -1,5 +1,5 @@
 <template>
-    <div v-if="friendship != null">
+    <div id="friendship-manager" v-if="friendship != null">
         <div v-if="friendship == false">
             <Button @click="request">Add friend</Button>
         </div>

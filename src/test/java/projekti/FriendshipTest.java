@@ -36,16 +36,16 @@ public class FriendshipTest extends BaseTest {
         userService.store(other);
 
         goTo(baseUrl + "/profiles/other");
-        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.tagName("button")));
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.id("friendship-manager")));
         assertTrue(pageSource().contains("Add friend"));
         friendshipService.store(other, test);
         goTo(baseUrl + "/profiles/other");
-        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.tagName("button")));
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.id("friendship-manager")));
         assertFalse(pageSource().contains("Add friend"));
         assertTrue(pageSource().contains("Accept"));
         friendshipService.accept(other, test);
         goTo(baseUrl + "/profiles/other");
-        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.tagName("button")));
+        driverWait().until(ExpectedConditions.presenceOfElementLocated(By.id("friendship-manager")));
         assertTrue(pageSource().contains("Unfriend"));
     }
 }
