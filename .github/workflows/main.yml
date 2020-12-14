@@ -27,10 +27,18 @@ jobs:
     needs: frontend
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: static
+          path: src/main/resources/static
       - uses: actions/setup-java@v1
         with:
           java-version: 11
-      - run: mvn -B test | grep -v "DEBUG"
+      - uses: actions/cache@v2
+        with:
+          path: ~/.m2 ~/.cache/selenium
+          key: ${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+      - run: mvn -B test
   build:
     runs-on: ubuntu-latest
     needs: test
