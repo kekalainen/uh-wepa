@@ -9,7 +9,7 @@
                 class="px-4 py-2 w-full text-sm placeholder-gray-500 border border-gray-400 focus:outline-none focus:border-purple-500 rounded-md"
                 :class="{ 'pl-10': icon }"
                 :type="type" :id="name" :placeholder="placeholder" :value="value" @input="$emit('input', $event.target.value)" @change="$emit('change', $event.target.value)"
-                :required="required" :min="min" :max="max"
+                :required="required" :pattern="pattern" :min="min" :max="max"
             />
         </div>
     </div>
@@ -24,6 +24,7 @@ export default {
         placeholder: String,
         icon: Array,
         required: Boolean,
+        pattern: String,
         min: Number,
         max: Number,
         type: {

@@ -4,9 +4,9 @@
             <div class="flex flex-col w-10/12 md:w-4/12 px-4 sm:px-6 md:px-8 lg:px-10 py-8 bg-white shadow-md rounded-md">
                 <h1 class="self-center">Welcome</h1>
                 <form class="my-6" @submit.prevent="submit">
-                    <Input :required="true" class="mb-3" label="Handle" placeholder="Handle" name="handle" :icon="['fas', 'at']" v-model="handle" />
+                    <Input :required="true" class="mb-3" label="Handle" placeholder="Handle" name="handle" :pattern="'[A-Za-z0-9_.]+'" :icon="['fas', 'at']" v-model="handle" />
                     <Input :required="true" class="mb-3" label="Name" placeholder="Name" name="name" :icon="['fas', 'address-card']" v-model="name" v-if="signUp" />
-                    <Input :required="true" class="mb-3" label="Profile slug" placeholder="Profile slug" name="slug" :icon="['fas', 'user']" v-model="slug" v-if="signUp" />
+                    <Input :required="true" class="mb-3" label="Profile slug" placeholder="Profile slug" name="slug" :pattern="'[A-Za-z0-9_.]+'" :icon="['fas', 'user']" v-model="slug" v-if="signUp" />
                     <Input :required="true" class="mb-6" label="Password" placeholder="Password" name="password" :icon="['fas', 'key']" type="password" v-model="password" />
                     <Button class="w-full">{{ signUp ? 'Sign up': 'Log in' }}</Button>
                 </form>
