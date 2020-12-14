@@ -5,10 +5,13 @@
             <Input class="w-1/2" :required="true" placeholder="Description" name="description" v-model="description" />
             <Button class="ml-2">Upload</Button>
         </form>
-        <div class="flex flex-wrap" v-if="!loading">
-            <Card class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="photo in photos" :key="photo.id">
-                <Photo @open="$router.push(`/profiles/${$route.params.slug}/photos/${photo.id}`)" :user="user" :photo="photo" :comment-button="true" />
-            </Card>
+        <div v-if="!loading">
+            <div class="flex flex-wrap" v-if="photos.length > 0">
+                <Card class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="photo in photos" :key="photo.id">
+                    <Photo @open="$router.push(`/profiles/${$route.params.slug}/photos/${photo.id}`)" :user="user" :photo="photo" :comment-button="true" />
+                </Card>
+            </div>
+            <p class="text-center" v-else>{{ user.name }} hasn't uploaded any photos.</p>
         </div>
         <LoadingSpinner v-else />
     </div>
@@ -24,7 +27,7 @@ export default {
         return {
             auth: globalThis.auth,
             loading: true,
-            photos: null,
+            photos: [],
             description: null
         }
     },

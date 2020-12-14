@@ -17,7 +17,7 @@ const Logout = () => import('./pages/Logout.vue');
 
 const routes = [
     { path: '/', component: Friends },
-    { path: '/people', component: People },
+    { path: '/people', name: 'people', component: People },
     { path: '/profiles/:slug', component: ProfileLayout,
         children: [
             { path: '', component: Profile },
