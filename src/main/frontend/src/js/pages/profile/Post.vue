@@ -22,10 +22,13 @@ export default {
     },
     methods: {
         load: function() {
-            wretch(`/api/users/${this.$route.params.slug}/posts/${this.$route.params.id}`).get().json(json => this.post = json);
+            wretch(`/api/users/${this.$route.params.slug}/posts/${this.$route.params.id}`).get().json(json => {
+                this.post = json;
+                document.title = `Post by ${this.post.author.name}`;
+            });
         }
     },
-    beforeMount: function() {
+    created() {
         this.load();
     }
 }

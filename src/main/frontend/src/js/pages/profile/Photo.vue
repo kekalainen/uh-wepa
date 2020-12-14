@@ -25,8 +25,9 @@ export default {
             wretch(`/api/users/${this.$route.params.slug}/photos/${this.$route.params.id}/json`).get().json(json => this.photo = json);
         }
     },
-    beforeMount: function() {
+    created() {
         this.load();
+        document.title = `Photo by ${this.user.name}`;
     }
 }
 </script>

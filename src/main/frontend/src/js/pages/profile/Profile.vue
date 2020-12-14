@@ -34,6 +34,9 @@ export default {
                 }
             ]
         }
+    },
+    created() {
+        document.title = 'Profile of ' + this.user.name;
     }
 }
 </script>

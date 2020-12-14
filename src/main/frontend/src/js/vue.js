@@ -16,22 +16,28 @@ import Login from './pages/Login.vue';
 const Logout = () => import('./pages/Logout.vue');
 
 const routes = [
-    { path: '/', component: Friends },
-    { path: '/people', name: 'people', component: People },
+    { path: '/', component: Friends, meta: { title: 'Friends' } },
+    { path: '/people', name: 'people', component: People, meta: { title: 'People' } },
     { path: '/profiles/:slug', component: ProfileLayout,
         children: [
-            { path: '', component: Profile },
-            { path: '/profiles/:slug/posts/:id', component: Post },
-            { path: '/profiles/:slug/photos/:id', component: Photo }
+            { path: '', component: Profile, meta: { title: 'Profile' } },
+            { path: '/profiles/:slug/posts/:id', component: Post, meta: { title: 'Post' } },
+            { path: '/profiles/:slug/photos/:id', component: Photo, meta: { title: 'Photo' } }
         ]
     },
-    { path: '/login', component: Login },
-    { path: '/logout', component: Logout }
+    { path: '/login', component: Login, meta: { title: 'Login' } },
+    { path: '/logout', component: Logout, meta: { title: 'Logout' } }
 ];
 
 const router = new VueRouter({
     routes,
     mode: 'history'
+})
+
+var titleFallback = document.title;
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title ?? titleFallback;
+    next();
 })
 
 new Vue({
