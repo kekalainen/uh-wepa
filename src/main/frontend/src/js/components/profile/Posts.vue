@@ -6,7 +6,7 @@
         </form>
         <div class="flex flex-wrap" v-if="!loading">
             <Card @click="activePost = post.id" class="w-full sm:w-1/2 md:w-1/3 p-2" v-for="post in posts" :key="post.id">
-                <Post @open="$router.push(`/profiles/${$route.params.slug}/posts/${post.id}`)" :user="user" :post="post" :comment-button="true" />
+                <Post @open="$router.push(`/profiles/${$route.params.slug}/posts/${post.id}`)" :user="user" :post="post" />
             </Card>
         </div>
         <LoadingSpinner v-else />

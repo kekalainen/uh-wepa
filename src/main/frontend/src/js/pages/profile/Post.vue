@@ -1,7 +1,7 @@
 <template>
     <div v-if="user && post">
         <Card>
-            <Post :user="user" :post="post" />
+            <Post :user="user" :post="post" :single="true" />
             <hr class="my-6">
             <Comments :user="user" :item="post" type="post" :friendship="friendship" />
         </Card>

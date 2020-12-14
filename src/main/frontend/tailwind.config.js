@@ -11,6 +11,9 @@ module.exports = {
         extend: {
             maxWidth: {
                 '16': '4rem'
+            },
+            transitionProperty: {
+                'max-height': 'max-height'
             }
         }
     },
