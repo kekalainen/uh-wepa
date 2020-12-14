@@ -10,7 +10,6 @@
                 </div>
                 <!-- desktop -->
                 <div class="hidden md:flex items-center">
-                    <font-awesome-icon class="text-gray-200 hover:text-white cursor-pointer" :icon="['fas', 'bell']" />
                     <div class="ml-3 relative">
                         <div @click="profileDropdownOpen = !profileDropdownOpen">
                             <button class="max-w-xs rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-purple-700 focus:ring-white">
@@ -44,7 +43,6 @@
                         <div class="font-medium leading-none text-white">{{ auth.name }}</div>
                         <div class="text-sm font-medium text-gray-200">@{{ auth.handle }}</div>
                     </div>
-                    <font-awesome-icon class="ml-auto text-gray-200 hover:text-white cursor-pointer" :icon="['fas', 'bell']" />
                 </div>
                 <div class="mt-3 px-2 space-y-1">
                     <router-link :to="link.url" class="block px-3 py-2 rounded-md text-base font-medium text-gray-200 hover:text-white hover:bg-gray-700" v-for="link in profileLinks" :key="link.name">{{ link.name }}</router-link>
